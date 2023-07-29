@@ -3,6 +3,7 @@ from typing import Union
 from .qa_base import BaseQARepository
 from .baidu import BaiduQARepository
 from .openai import OpenAIQARepository
+from core.helpers import get_qa_backend
 
 baidu_qa = BaiduQARepository()
 openai_qa = OpenAIQARepository()
@@ -10,7 +11,7 @@ openai_qa = OpenAIQARepository()
 
 def get_qa_repo(backend: Union[str, None] = None) -> BaseQARepository:
     if backend is None:
-        backend = os.getenv("QA_BACKEND", "openai")
+        backend = get_qa_backend()
 
     if backend == "baidu":
         return baidu_qa

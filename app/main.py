@@ -5,6 +5,7 @@ Copyright (c) 2023, Nimblex Co .,Ltd.
 @author: zhangwenping
 """
 import os
+import logging
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import JSONResponse
@@ -15,8 +16,13 @@ from api import v1_router
 from repositories.kb import get_kb_repo
 
 # 加载数据到知识库
-kb_repo = get_kb_repo()
-kb_repo.load_dir(os.getenv("DOCS_PATH"))
+def load_local_docs():
+    logging.info("开始加载数据")
+    kb_repo = get_kb_repo()
+    kb_repo.load_dir(os.getenv("DOCS_PATH"))
+    logging.info("数据加载完成")
+
+load_local_docs()
 
 app = FastAPI()
 

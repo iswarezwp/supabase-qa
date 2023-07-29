@@ -15,7 +15,7 @@ from core.memfire_cloud import client as mf_client
 
 # knowledge base repository
 class MemFireKBRepository(KBRepository):
-    def __init__(self, embedding):
+    def __init__(self, embedding=None):
         self.vector_store = None
         super().__init__(embedding)
 
@@ -24,7 +24,7 @@ class MemFireKBRepository(KBRepository):
         matched_docs = self.vector_store.similarity_search(question)
         return matched_docs
 
-    def process_doc(self, doc_path: str) -> List[any]:
+    def load_doc(self, doc_path: str) -> List[any]:
         # 处理文档：提取文本、切分、embedding、写入向量库
         raise NotImplementedError()
 

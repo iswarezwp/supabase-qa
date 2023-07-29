@@ -10,16 +10,17 @@ from typing import List
 from abc import ABC, abstractmethod
 
 from langchain.embeddings import OpenAIEmbeddings
+from core.helpers import get_qa_backend
 
 # knowledge base repository
 class KBRepository(ABC):
     def __init__(self, embedding=None):
         if embedding is None:
             embedding = self._get_embedding()
-        self._embedding = embedding
+        self.embedding = embedding
 
     def _get_embedding(self):
-        backend = getenv('QA_BACKEND')
+        backend = get_qa_backend()
         if backend == 'openai':
             return self._get_openai_embedding()
 
@@ -27,10 +28,6 @@ class KBRepository(ABC):
 
     def _get_openai_embedding(self):
         return OpenAIEmbeddings(openai_api_key=getenv('OPENAI_API_KEY'))
-
-    @attrgetter
-    def embedding(self):
-        return self._embedding
 
     @abstractmethod
     def search_docs(self, question: str) -> List[any]:
