@@ -4,3 +4,4 @@ fastapi[all]==0.99.1
 supabase
 openai
 langchain
+tiktoken
