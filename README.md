@@ -1,3 +1,48 @@
+## 准备工作
+- 在[MemFire Cloud](https://memfiredb.com)上创建应用，后面需要用到应用的API URL和Service Role Key。
+可以在应用的`应用设置`->`API`页面找到响应的配置
+
+- 创建应用后，在应用的`SQL执行器`页面执行如下脚本
+```sql
+-- Enable the pgvector extension to work with embedding vectors
+create extension vector;
+
+-- Create a table to store your documents
+create table documents (
+    id bigserial primary key,
+    content text, -- corresponds to Document.pageContent
+    metadata jsonb, -- corresponds to Document.metadata
+    embedding vector(1536) -- 1536 works for OpenAI embeddings, change if needed
+);
+
+CREATE FUNCTION match_documents(query_embedding vector(1536), match_count int)
+   RETURNS TABLE(
+       id uuid,
+       content text,
+       metadata jsonb,
+       -- we return matched vectors to enable maximal marginal relevance searches
+       embedding vector(1536),
+       similarity float)
+   LANGUAGE plpgsql
+   AS $$
+   # variable_conflict use_column
+BEGIN
+   RETURN query
+   SELECT
+       id,
+       content,
+       metadata,
+       embedding,
+       1 -(documents.embedding <=> query_embedding) AS similarity
+   FROM
+       documents
+   ORDER BY
+       documents.embedding <=> query_embedding
+   LIMIT match_count;
+END;
+$$;
+```
+
 ## 如何运行
 ### linux 下运行
 1. 安装依赖
