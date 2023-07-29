@@ -7,6 +7,7 @@ pip install -r app/requirements.txt
 
 2. 设置参数
 ```bash
+export DOCS_PATH=./docs
 export SUPABASE_URL="your-api-url"
 export SUPABASE_KEY="your-service-role-key"
 export OPENAI_API_KEY="your-openai-api-key"
@@ -25,6 +26,7 @@ docker run -p 8000:80 \
     -e SUPABASE_URL="your-api-url" \
     -e SUPABASE_KEY="your-service-role-key" \
     -e OPENAI_API_KEY="your-openai-api-key" \
+    -v ./docs:/docs \
     memfirecloud-qa:v1
 ```
 
@@ -36,6 +38,9 @@ uvicorn main:app --reload --host 0.0.0.0
 
 ## 参数配置支持
 ```bash
+# 本地文档路径
+export DOCS_PATH=./docs
+
 # memfire cloud 应用的API URL和Service role key
 export SUPABASE_URL="your-api-url"
 export SUPABASE_KEY="your-service-role-key"

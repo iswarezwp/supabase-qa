@@ -4,6 +4,7 @@ Copyright (c) 2023, Nimblex Co .,Ltd.
 
 @author: zhangwenping
 """
+import os
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import JSONResponse
@@ -11,6 +12,11 @@ from postgrest.exceptions import APIError
 from openai import OpenAIError
 
 from api import v1_router
+from repositories.kb import get_kb_repo
+
+# 加载数据到知识库
+kb_repo = get_kb_repo()
+kb_repo.load_dir(os.getenv("DOCS_PATH"))
 
 app = FastAPI()
 

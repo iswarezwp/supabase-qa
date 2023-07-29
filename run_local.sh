@@ -1,3 +1,4 @@
+export DOCS_PATH=./docs
 export SUPABASE_URL="your-api-url"
 export SUPABASE_KEY="your-service-role-key"
 
