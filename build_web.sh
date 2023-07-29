@@ -1,0 +1,1 @@
+rm -rf app/www && cd web && npm run build && mv dist ../app/www
