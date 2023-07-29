@@ -1,3 +1,9 @@
+## 项目介绍
+- 使用FastAPI作为Web服务端框架
+- 使用MemFire Cloud作为向量数据和个人文档数据存储
+- 使用LangChain进行AI应用开发
+- 使用Next.js开发了一个简陋的UI界面用于问答演示
+
 ## 准备工作
 - 在[MemFire Cloud](https://memfiredb.com)上创建应用，后面需要用到应用的API URL和Service Role Key。
 可以在应用的`应用设置`->`API`页面找到响应的配置
