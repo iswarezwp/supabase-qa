@@ -49,6 +49,13 @@ END;
 $$;
 ```
 
+- 准备好用来测试的文档目录
+默认需要将文档放到 app/docs下，可以通过环境变量指定其他目录
+
+- 准备好openai的账号
+请参考网上教程申请一个openai账号，后面代码运行需要用到openai的API KEY
+
+
 ## 如何运行
 ### linux 下运行
 1. 安装依赖
@@ -87,7 +94,10 @@ docker run -p 8000:80 \
 uvicorn main:app --reload --host 0.0.0.0
 ```
 
-## 参数配置支持
+## 如何访问
+用浏览器访问: `http://ip:8000/` 可以显示一个简陋的问答页面
+
+## 支持的参数配置
 ```bash
 # 本地文档路径
 export DOCS_PATH=./docs
