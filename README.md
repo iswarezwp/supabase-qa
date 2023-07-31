@@ -4,6 +4,8 @@
 - 使用LangChain进行AI应用开发
 - 使用Next.js开发了一个简陋的UI界面用于问答演示
 
+完整的教程文档请参考：[FastAPI+MemFire Cloud+LangChain开发ChatGPT应用](https://mp.weixin.qq.com/s/Ojg328TVa6doGN9Yh3FabA)
+
 ## 准备工作
 - 在[MemFire Cloud](https://memfiredb.com)上创建应用，后面需要用到应用的API URL和Service Role Key。
 可以在应用的`应用设置`->`API`页面找到响应的配置
